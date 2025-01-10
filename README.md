@@ -1,16 +1,16 @@
 ## Hi there 👋
 
-<!--
-**SciLejkeee/SciLejkeee** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+import requests
 
-Here are some ideas to get you started:
+username = "SciLejkeee"
+url = f"https://www.codewars.com/api/v1/users/{username}"
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+response = requests.get(url)
+data = response.json()
+
+with open("README.md", "w") as readme:
+    readme.write(f"## 🏆 Codewars Achievements\n\n")
+    readme.write(f"- **Username**: [{username}](https://www.codewars.com/users/{username})\n")
+    readme.write(f"- **Total Honor**: {data['honor']}\n")
+    readme.write(f"- **Kata Completed**: {data['codeChallenges']['totalCompleted']}\n")
+    readme.write(f"- **Current Rank**: {data['ranks']['overall']['name']}\n")
